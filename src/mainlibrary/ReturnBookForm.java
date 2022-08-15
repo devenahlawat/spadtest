@@ -19,10 +19,10 @@ public class ReturnBookForm extends javax.swing.JFrame {
      */
     public ReturnBookForm() {
         initComponents();
-        Calendar cal = Calendar.getInstance();
+           Calendar cal = Calendar.getInstance();
 
         IDate.setText(String.valueOf(cal.get(Calendar.DATE)));
-        IMonth.setText(String.valueOf(cal.get(Calendar.MONTH) + 1));
+        IMonth.setText(String.valueOf(cal.get(Calendar.MONTH)+1));
         IYear.setText(String.valueOf(cal.get(Calendar.YEAR)));
     }
 
@@ -182,39 +182,46 @@ public class ReturnBookForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
+        
         int BookIDV;
         BookIDV = Integer.parseInt(BookID.getText());
         int UserIDV;
         UserIDV = Integer.parseInt(UserID.getText());
-
-        String IFDate = IYear.getText() + "-" + IMonth.getText() + "-" + IDate.getText();
+        
+        String IFDate = IYear.getText() + "-"+IMonth.getText()+"-"+IDate.getText();
         System.out.println(IFDate);
-
+        
         //Date IFDDate = cal.getDate();
-        if (TransBookDao.BookValidate(BookID.getText()) && TransBookDao.UserValidate(UserID.getText())) {
-            if (TransBookDao.CheckIssuedBook(BookIDV)) {
-
-                if (TransBookDao.ReturnBook(BookIDV, UserIDV) != 0) {
-                    JOptionPane.showMessageDialog(ReturnBookForm.this, "Book is returned by the User!", "Returning Book Successfull!", JOptionPane.ERROR_MESSAGE);
-                    UserID.setText("");
-                    BookID.setText("");
-                } else {
-                    JOptionPane.showMessageDialog(ReturnBookForm.this, "Unable to Return Book!", "Returning Book Error!", JOptionPane.ERROR_MESSAGE);
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(ReturnBookForm.this, "The Book  is NOT Issued by THIS User!", "Issuing Book Error!", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            if (TransBookDao.UserValidate(UserID.getText())) {
-                JOptionPane.showMessageDialog(ReturnBookForm.this, "The Book  is NOT available in Library Database!", "Returning Book Error!", JOptionPane.ERROR_MESSAGE);
-            } else if (TransBookDao.BookValidate(BookID.getText())) {
-                JOptionPane.showMessageDialog(ReturnBookForm.this, "The User is NOT available in Library Database!", "Returning Book Error!", JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(ReturnBookForm.this, "The Book  and User are NOT available in Library Database!", "Returning Book Error!", JOptionPane.ERROR_MESSAGE);
-            }
-
+        
+     
+        
+        if(TransBookDao.BookValidate(BookID.getText()) && TransBookDao.UserValidate(UserID.getText()))
+        {
+               if(TransBookDao.CheckIssuedBook(BookIDV))
+               {
+                   
+                   if(TransBookDao.ReturnBook(BookIDV, UserIDV)!=0)
+                   {
+                        JOptionPane.showMessageDialog(ReturnBookForm.this, "Book is returned by the User!","Returning Book Successfull!", JOptionPane.ERROR_MESSAGE);
+                        UserID.setText("");
+                        BookID.setText("");
+                   }
+                   else
+                        JOptionPane.showMessageDialog(ReturnBookForm.this, "Unable to Return Book!","Returning Book Error!", JOptionPane.ERROR_MESSAGE);
+                       
+               }
+               else
+                JOptionPane.showMessageDialog(ReturnBookForm.this, "The Book  is NOT Issued by THIS User!","Issuing Book Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {    if(TransBookDao.UserValidate(UserID.getText()))
+                    JOptionPane.showMessageDialog(ReturnBookForm.this, "The Book  is NOT available in Library Database!","Returning Book Error!", JOptionPane.ERROR_MESSAGE);
+             else
+                if(TransBookDao.BookValidate(BookID.getText()))
+                    JOptionPane.showMessageDialog(ReturnBookForm.this, "The User is NOT available in Library Database!","Returning Book Error!", JOptionPane.ERROR_MESSAGE);
+                 else
+            JOptionPane.showMessageDialog(ReturnBookForm.this, "The Book  and User are NOT available in Library Database!","Returning Book Error!", JOptionPane.ERROR_MESSAGE);
+       
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

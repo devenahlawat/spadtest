@@ -4,12 +4,10 @@
  * and open the template in the editor.
  */
 package mainlibrary;
-
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import static mainlibrary.LibrarianSuccess.ThisLogined;
-
 /**
  *
  * @author bikash
@@ -27,19 +25,19 @@ public class IssueBookForm extends javax.swing.JFrame {
         String TodayYear;
         TodayYear = String.valueOf(year);
         IYear.setText(TodayYear);
-        String TodayMonth = String.valueOf(cal.get(Calendar.MONTH) + 1);
+        String TodayMonth = String.valueOf(cal.get(Calendar.MONTH)+1);
         IMonth.setText(TodayMonth);
         String TodayDate = String.valueOf(cal.get(Calendar.DATE));
         IDate.setText(TodayDate);
-
+        
         Calendar addcal = null;
         addcal = cal;
-        addcal.add(Calendar.DAY_OF_YEAR, 15);
+        addcal.add(Calendar.DAY_OF_YEAR,15);
 
         RDate.setText(String.valueOf(addcal.get(Calendar.DATE)));
-        RMonth.setText(String.valueOf(addcal.get(Calendar.MONTH) + 1));
+        RMonth.setText(String.valueOf(addcal.get(Calendar.MONTH)+1));
         RYear.setText(String.valueOf(addcal.get(Calendar.YEAR)));
-
+        
     }
 
     /**
@@ -244,39 +242,47 @@ public class IssueBookForm extends javax.swing.JFrame {
         BookIDV = Integer.parseInt(BookID.getText());
         int UserIDV;
         UserIDV = Integer.parseInt(UserID.getText());
-
-        String IFDate = IYear.getText() + "-" + IMonth.getText() + "-" + IDate.getText();
-        String RFDate = RYear.getText() + "-" + RMonth.getText() + "-" + RDate.getText();
+        
+        String IFDate = IYear.getText() + "-"+IMonth.getText()+"-"+IDate.getText();
+        String RFDate = RYear.getText() + "-"+RMonth.getText()+"-"+RDate.getText();
         System.out.println(IFDate);
-
+        
         //Date IFDDate = cal.getDate();
-        if (TransBookDao.BookValidate(BookID.getText()) && TransBookDao.UserValidate(UserID.getText())) {
-
-            if (TransBookDao.Check(UserIDV) == 0) {
-                JOptionPane.showMessageDialog(IssueBookForm.this, "User has already Issued Maximum No of Books", "Issue Error!", JOptionPane.ERROR_MESSAGE);
-            } else {
-                if (TransBookDao.IssueBook(BookIDV, UserIDV, IFDate, RFDate) != 0) {
-
-                    JOptionPane.showMessageDialog(IssueBookForm.this, "The Book  is Issued!", "Book Issued!", JOptionPane.ERROR_MESSAGE);
-                    BookID.setText("");
-                    UserID.setText("");
-                } else {
-                    JOptionPane.showMessageDialog(IssueBookForm.this, "Unable to Issue Book!", "Issuing Book Error!", JOptionPane.ERROR_MESSAGE);
-                }
+        
+     
+        
+        if(TransBookDao.BookValidate(BookID.getText()) && TransBookDao.UserValidate(UserID.getText()))
+        {
+          
+            if(TransBookDao.Check(UserIDV)==0)
+               JOptionPane.showMessageDialog(IssueBookForm.this, "User has already Issued Maximum No of Books","Issue Error!", JOptionPane.ERROR_MESSAGE); 
+           else
+            {
+            if(TransBookDao.IssueBook(BookIDV, UserIDV, IFDate, RFDate)!=0)
+            {
+              
+                JOptionPane.showMessageDialog(IssueBookForm.this, "The Book  is Issued!","Book Issued!", JOptionPane.ERROR_MESSAGE);
+                BookID.setText("");
+                UserID.setText("");
             }
-
-        } else {
-            if (TransBookDao.UserValidate(UserID.getText())) {
-                JOptionPane.showMessageDialog(IssueBookForm.this, "The Book  is NOT available in Library Database!", "Issuing Book Error!", JOptionPane.ERROR_MESSAGE);
-            } else if (TransBookDao.BookValidate(BookID.getText())) {
-                JOptionPane.showMessageDialog(IssueBookForm.this, "The User is NOT available in Library Database!", "Issuing Book Error!", JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(IssueBookForm.this, "The Book  and User are NOT available in Library Database!", "Issuing Book Error!", JOptionPane.ERROR_MESSAGE);
+            else
+              JOptionPane.showMessageDialog(IssueBookForm.this, "Unable to Issue Book!","Issuing Book Error!", JOptionPane.ERROR_MESSAGE);
             }
-
+            
+            
         }
-        //  if(IssueBookDao.)
-
+        else
+        {    if(TransBookDao.UserValidate(UserID.getText()))
+                    JOptionPane.showMessageDialog(IssueBookForm.this, "The Book  is NOT available in Library Database!","Issuing Book Error!", JOptionPane.ERROR_MESSAGE);
+             else
+                if(TransBookDao.BookValidate(BookID.getText()))
+                    JOptionPane.showMessageDialog(IssueBookForm.this, "The User is NOT available in Library Database!","Issuing Book Error!", JOptionPane.ERROR_MESSAGE);
+                 else
+            JOptionPane.showMessageDialog(IssueBookForm.this, "The Book  and User are NOT available in Library Database!","Issuing Book Error!", JOptionPane.ERROR_MESSAGE);
+       
+        }
+      //  if(IssueBookDao.)
+   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

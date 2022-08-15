@@ -122,28 +122,31 @@ public class DeleteBook extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String Pass = String.valueOf(password.getPassword());
-        if (LibrarianDao.validate(UserName.getText(), Pass)) {
-
-            int BookIDV = Integer.parseInt(BookID.getText());
-            if (TransBookDao.CheckIssuedBook(BookIDV)) {
-                JOptionPane.showMessageDialog(DeleteBook.this, "Book is Issued", "Error!", JOptionPane.ERROR_MESSAGE);
-            } else {
-                if (BookDao.Delete(BookIDV) != 0) {
-                    JOptionPane.showMessageDialog(DeleteBook.this, "Book is Deleted", "Deleted!", JOptionPane.ERROR_MESSAGE);
-                    UserName.setText("");
-                    password.setText("");
-                    BookID.setText("");
-                } else {
-                    JOptionPane.showMessageDialog(DeleteBook.this, "Unable to delete book", "Error!", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+        if(LibrarianDao.validate(UserName.getText(),Pass))
+        {
+           
+             int BookIDV = Integer.parseInt(BookID.getText());
+             if(TransBookDao.CheckIssuedBook(BookIDV))
+                 JOptionPane.showMessageDialog(DeleteBook.this, "Book is Issued","Error!", JOptionPane.ERROR_MESSAGE);     
+             else
+             {
+                 if(BookDao.Delete(BookIDV)!=0)
+             {
+                 JOptionPane.showMessageDialog(DeleteBook.this, "Book is Deleted","Deleted!", JOptionPane.ERROR_MESSAGE);
+                 UserName.setText("");
+                 password.setText("");
+                 BookID.setText("");
+             }
+             else
+                  JOptionPane.showMessageDialog(DeleteBook.this, "Unable to delete book","Error!", JOptionPane.ERROR_MESSAGE); 
+        }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        LibrarianSuccess.ThisLogined.setVisible(true);
+       LibrarianSuccess.ThisLogined.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void UserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserNameActionPerformed

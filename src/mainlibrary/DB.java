@@ -15,26 +15,22 @@ import java.util.Properties;
  * @author bikash
  */
 public class DB {
-
-    public static String user = "root";
-    public static String connection = "jdbc:mysql://localhost:3306/library";
     
-    public static Connection getConnection() {
-        Connection con = null;
-        try {
-            Properties props = new Properties();
-            props.put("user", user);
-            props.put("password", "your password here");
-            props.put("useUnicode", "true");
-            props.put("useServerPrepStmts", "false"); // use client-side prepared statement
-            props.put("characterEncoding", "UTF-8"); // ensure charset is utf8 here
 
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(connection, props);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return con;
-    }
+	public static Connection getConnection(){
+		Connection con=null;
+		try{
+                            Properties props = new Properties(); 
+    props.put("user", "root");         
+    props.put("password", "1234");
+    props.put("useUnicode", "true");
+    props.put("useServerPrepStmts", "false"); // use client-side prepared statement
+    props.put("characterEncoding", "UTF-8"); // ensure charset is utf8 here
+
+			Class.forName("com.mysql.jdbc.Driver");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/library",props);
+		}catch(ClassNotFoundException | SQLException e){System.out.println(e);}
+		return con;
+	}
 
 }

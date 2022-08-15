@@ -11,19 +11,17 @@ import java.sql.ResultSet;
 import javax.swing.JFrame;
 
 /**
- * public static JFrame ThisLogined;
- *
+ *  public static JFrame ThisLogined;
  * @author bikash
  */
 public class LibrarianSuccess extends javax.swing.JFrame {
-
+    
     public static JFrame ThisLogined;
-
     public JFrame GetLibrarianLogin() {
-        return ThisLogined;//To change body of generated methods, choose Tools | Templates.
+       return ThisLogined;//To change body of generated methods, choose Tools | Templates.
     }
-
-    public static String Name, LibrarianID, Email;
+    
+    public static String Name,LibrarianID,Email;
 
     /**
      * Creates new form LibrarianSuccess
@@ -34,7 +32,8 @@ public class LibrarianSuccess extends javax.swing.JFrame {
         jTextField2.setText(LibrarianID);
         jTextField3.setText(Email);
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -273,19 +272,19 @@ public class LibrarianSuccess extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
-        ViewBook.main(new String[]{});
+     
+        ViewBook.main(new String[] {});
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        IssueBookForm.main(new String[]{});
+        IssueBookForm.main(new String[] {});
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+       this.setVisible(false);
         ReturnBookForm.main(new String[]{});
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -342,7 +341,7 @@ public class LibrarianSuccess extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    static void main(String args[]) {//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+     static void main(String args[]) {//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
@@ -363,44 +362,44 @@ public class LibrarianSuccess extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(LibrarianSuccess.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+       
         /* Set the Nimbus look and feel */
- /* Create and display the form */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
+                 
                 ThisLogined = new LibrarianSuccess();
                 ThisLogined.setVisible(true);
-
+                
             }
         });
-        String User = args[0];
-        String Pass = args[1];
-        try {
-            Connection Con;
-            Con = DB.getConnection();
-            PreparedStatement ps;
-            ps = Con.prepareStatement("select * from Librarian where UserName=? and Password=?");
-            ps.setString(1, User);
-            ps.setString(2, Pass);
-            ResultSet rs;
-            rs = ps.executeQuery();
+                 String User=args[0];
+        String Pass=args[1];
+        try{
+			Connection Con;
+                        Con = DB.getConnection();
+			PreparedStatement ps;
+                        ps = Con.prepareStatement("select * from Librarian where UserName=? and Password=?");
+			ps.setString(1,User);
+			ps.setString(2,Pass);
+			ResultSet rs;
+                          rs = ps.executeQuery();
             boolean status = rs.next();
-            Name = rs.getString("FullName");
+            Name=rs.getString("FullName");
             LibrarianID = rs.getString("LibrarianID");
             Email = rs.getString("Email");
-            System.out.println(Name + " " + LibrarianID + " " + Email);
+            System.out.println(Name+" "+LibrarianID+" "+Email);
             Con.close();
-
-        } catch (Exception f) {
-            System.out.println(f);
-        }
-
+        
+       
+         }catch(Exception f){System.out.println(f);}
+        
     }
-
+    
     /**
      *
      */
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

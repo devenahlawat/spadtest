@@ -228,33 +228,38 @@ public class UserForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String User = UserName.getText();
-        if (UsersDao.CheckIfAlready(User)) {
-            JOptionPane.showMessageDialog(UserForm.this, "UserName already taken!", "Adding new User Error!", JOptionPane.ERROR_MESSAGE);
-        } else {
-            User = UserName.getText();
-            String UserPass = String.valueOf(Password.getPassword());
-            String UserEmail = Email.getText();
-            Calendar cal = Calendar.getInstance();
-            String Date;
-            String RDate = String.valueOf(cal.get(Calendar.DATE));
-            String RMonth = String.valueOf(cal.get(Calendar.MONTH) + 1);
-            String RYear = String.valueOf(cal.get(Calendar.YEAR));
-            Date = RYear + "-" + RMonth + "-" + RDate;
+         String User = UserName.getText();
+         if(UsersDao.CheckIfAlready(User))
+         {
+             JOptionPane.showMessageDialog(UserForm.this, "UserName already taken!","Adding new User Error!", JOptionPane.ERROR_MESSAGE);
+         }
+         else
+         {
+             User = UserName.getText();
+             String UserPass = String.valueOf(Password.getPassword());
+             String UserEmail = Email.getText();
+        Calendar cal = Calendar.getInstance();
+        String Date;
+        String RDate = String.valueOf(cal.get(Calendar.DATE));
+        String RMonth =  String.valueOf(cal.get(Calendar.MONTH)+1);
+        String RYear= String.valueOf(cal.get(Calendar.YEAR));
+        Date = RYear+"-"+RMonth+"-"+RDate;
+                
+                if(UsersDao.AddUser(User,UserPass,UserEmail,Date)!=0)
+                {
+                    JOptionPane.showMessageDialog(UserForm.this, "User is Added Successfully!","Adding New User!", JOptionPane.ERROR_MESSAGE);
+                    UserName.setText("");
+                    Password.setText("");
+                    Email.setText("");
+                    Position.setText("");
+                    Program.setText("");
+                    Year.setText("");
+                }
+                else
+                       JOptionPane.showMessageDialog(UserForm.this, "Unable to add new User","Adding new User Error!", JOptionPane.ERROR_MESSAGE);
 
-            if (UsersDao.AddUser(User, UserPass, UserEmail, Date) != 0) {
-                JOptionPane.showMessageDialog(UserForm.this, "User is Added Successfully!", "Adding New User!", JOptionPane.ERROR_MESSAGE);
-                UserName.setText("");
-                Password.setText("");
-                Email.setText("");
-                Position.setText("");
-                Program.setText("");
-                Year.setText("");
-            } else {
-                JOptionPane.showMessageDialog(UserForm.this, "Unable to add new User", "Adding new User Error!", JOptionPane.ERROR_MESSAGE);
-            }
-
-        }
+        
+         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

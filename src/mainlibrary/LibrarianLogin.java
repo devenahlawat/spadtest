@@ -168,18 +168,19 @@ public class LibrarianLogin extends javax.swing.JFrame {
         Uname = username.getText();
         String Pass;
         Pass = String.valueOf(password.getPassword());
-        System.out.println(Uname + " " + Pass);
-        if (LibrarianDao.validate(Uname, Pass)) {
-
-            this.dispose();
-            LibrarianSuccess.main(new String[]{Uname, Pass});
-
-        } else {
-            JOptionPane.showMessageDialog(LibrarianLogin.this, "Sorry, Username or Password Error", "Login Error!", JOptionPane.ERROR_MESSAGE);
-            username.setText("");
-            password.setText("");
+        System.out.println(Uname+" "+Pass);
+        if(LibrarianDao.validate(Uname, Pass))
+        {
+            
+             this.dispose();
+             LibrarianSuccess.main(new String[]{Uname,Pass});
+           
+        }else{
+				JOptionPane.showMessageDialog(LibrarianLogin.this, "Sorry, Username or Password Error","Login Error!", JOptionPane.ERROR_MESSAGE);
+				username.setText("");
+				password.setText("");
         }
-
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -191,6 +192,7 @@ public class LibrarianLogin extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -223,7 +225,7 @@ public class LibrarianLogin extends javax.swing.JFrame {
         thiswin = new LibrarianLogin();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                thiswin.setVisible(true);
+              thiswin.setVisible(true);
             }
         });
     }

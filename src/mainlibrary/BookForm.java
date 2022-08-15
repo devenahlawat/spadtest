@@ -15,7 +15,7 @@ import static mainlibrary.LibrarianSuccess.ThisLogined;
  * @author bikash
  */
 public class BookForm extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form BookForm
      */
@@ -242,26 +242,29 @@ public class BookForm extends javax.swing.JFrame {
         String ShelfN = Shelf.getText();
         String RowN = Row.getText();
         String GenreN = Genre.getText();
-
-        if (BookDao.PublisherValidate(PublisherN)) {
-
-        } else {
-            if (BookDao.AddPublisher(PublisherN) != 0) {
-                ; // JOptionPane.showMessageDialog(BookForm.this, "Sorry, Publisher can't be added!","Publisher Error!", JOptionPane.ERROR_MESSAGE);
+        
+        if(BookDao.PublisherValidate(PublisherN))
+        {
+            
+        }else{
+                                if(BookDao.AddPublisher(PublisherN)!=0)
+                                {
+                                  ; // JOptionPane.showMessageDialog(BookForm.this, "Sorry, Publisher can't be added!","Publisher Error!", JOptionPane.ERROR_MESSAGE);
+                                }
+        }
+        if(BookDao.SaveBook(BookN,AuthorN,PublisherN,ShelfN,RowN,GenreN)!=0)
+            {
+                JOptionPane.showMessageDialog(BookForm.this, "The Book is added!","Book Added!", JOptionPane.ERROR_MESSAGE);
+                BookName.setText("");
+                Author.setText("");
+                Publisher.setText("");
+                Shelf.setText("");
+                Row.setText("");
+                Genre.setText("");
             }
-        }
-        if (BookDao.SaveBook(BookN, AuthorN, PublisherN, ShelfN, RowN, GenreN) != 0) {
-            JOptionPane.showMessageDialog(BookForm.this, "The Book is added!", "Book Added!", JOptionPane.ERROR_MESSAGE);
-            BookName.setText("");
-            Author.setText("");
-            Publisher.setText("");
-            Shelf.setText("");
-            Row.setText("");
-            Genre.setText("");
-        } else {
-            JOptionPane.showMessageDialog(BookForm.this, "The Book is not added!", "Adding Book Error!", JOptionPane.ERROR_MESSAGE);
-        }
-
+            else
+                JOptionPane.showMessageDialog(BookForm.this, "The Book is not added!","Adding Book Error!", JOptionPane.ERROR_MESSAGE);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void GenreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenreActionPerformed

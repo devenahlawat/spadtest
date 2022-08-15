@@ -14,8 +14,8 @@ import java.sql.ResultSet;
  * @author bikash
  */
 public class UserLoginSuccess extends javax.swing.JFrame {
-
-    public static String GetName, GetRegDate, GetEmail, GetUserID;
+    
+    public static String GetName,GetRegDate,GetEmail,GetUserID;
 
     /**
      * Creates new form LibrarianSuccess
@@ -196,12 +196,12 @@ public class UserLoginSuccess extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        UserViewBook.main(new String[]{});
+        UserViewBook.main(new String[] {});
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        UserView.main(new String[]{GetUserID});
+        UserView.main(new String[] {GetUserID});
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -248,28 +248,27 @@ public class UserLoginSuccess extends javax.swing.JFrame {
                 new UserLoginSuccess().setVisible(true);
             }
         });
-
-        String User = args[0];
-        String Pass = args[1];
-        try {
-            Connection Con;
-            Con = DB.getConnection();
-            PreparedStatement ps;
-            ps = Con.prepareStatement("select * from Users where UserName=? and UserPass=?");
-            ps.setString(1, User);
-            ps.setString(2, Pass);
-            ResultSet rs;
-            rs = ps.executeQuery();
+        
+        String User=args[0];
+        String Pass=args[1];
+        try{
+			Connection Con;
+                        Con = DB.getConnection();
+			PreparedStatement ps;
+                        ps = Con.prepareStatement("select * from Users where UserName=? and UserPass=?");
+			ps.setString(1,User);
+			ps.setString(2,Pass);
+			ResultSet rs;
+                          rs = ps.executeQuery();
             boolean status = rs.next();
             GetName = User;
             GetRegDate = rs.getString("RegDate");
             GetEmail = rs.getString("Email");
             GetUserID = rs.getString("UserID");
             Con.close();
-
-        } catch (Exception f) {
-            System.out.println(f);
-        }
+        
+       
+         }catch(Exception f){System.out.println(f);}
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

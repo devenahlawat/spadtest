@@ -26,31 +26,33 @@ public class UserView extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewBook
-     *
      * @throws java.sql.SQLException
      */
+    
     public static String UserID;
-
+    
     public UserView() throws SQLException {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
+        
         initComponents();
-
-        int UserIDV = Integer.parseInt(UserID);
+        
+        int UserIDV =Integer.parseInt(UserID);
         DefaultTableModel model;
         model = (DefaultTableModel) jTable1.getModel();
-        // String Data[][]=null;
-        //  String Column[]=null;
-        try (Connection Con = DB.getConnection()) {
-            PreparedStatement ps = Con.prepareStatement("select IssuedBook.BookID,Books.BookName , IssuedBook.IssueDate, IssuedBook.ReturnDate from Books,IssuedBook where Books.BookID=IssuedBook.BookID and IssuedBook.UserID=?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ps.setInt(1, UserIDV);
-            ResultSet rs = ps.executeQuery();
-
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            int colnum = rsmd.getColumnCount();
-
-            /*   Column = new String[colnum];
+       // String Data[][]=null;
+      //  String Column[]=null;
+        try(Connection Con = DB.getConnection()) {
+            PreparedStatement ps=Con.prepareStatement("select IssuedBook.BookID,Books.BookName , IssuedBook.IssueDate, IssuedBook.ReturnDate from Books,IssuedBook where Books.BookID=IssuedBook.BookID and IssuedBook.UserID=?",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            ps.setInt(1,UserIDV);
+            ResultSet rs= ps.executeQuery();
+            
+           ResultSetMetaData rsmd = rs.getMetaData();
+  
+            int colnum=rsmd.getColumnCount();
+        
+            
+            
+         /*   Column = new String[colnum];
             for(int i=1;i<=colnum;i++){
                Column[i-1]=rsmd.getColumnClassName(i);
                 }
@@ -64,18 +66,19 @@ public class UserView extends javax.swing.JFrame {
             int count=0; */
             String Row[];
             Row = new String[colnum];
-            while (rs.next()) {
-                for (int i = 1; i <= colnum; i++) {
-                    Row[i - 1] = rs.getString(i);
-                }
-                model.addRow(Row);
+            while(rs.next()){
+                for(int i=1;i<=colnum;i++){
+                    Row[i-1]=rs.getString(i);
+                    }
+                 model.addRow(Row);
             }
-
-            //count++;
-            Con.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+   
+                    //count++;
+               
+            
+           Con.close();
+        }catch(Exception e){System.out.println(e);
+    }
     }
 
     /**
@@ -203,7 +206,7 @@ public class UserView extends javax.swing.JFrame {
                 }
             }
         });
-
+        
         UserID = args[0];
     }
 
@@ -213,5 +216,6 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
 
 }
